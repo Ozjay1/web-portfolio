@@ -371,6 +371,7 @@ div .img {
 #contact-form {
     width: 300px;
     background: red;
+    overflow: hidden;
 }
 
 #contact-form textarea, #contact-form input {
