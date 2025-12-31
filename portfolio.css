@@ -376,7 +376,7 @@ div .img {
 #contact-form textarea, #contact-form input {
     padding-left: 10px;
     margin-left: 0;
-    width: 100%;
+    width: 300px;
 }
 
 #contact-form button {
