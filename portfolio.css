@@ -370,6 +370,7 @@ div .img {
 
 #contact-form {
     width: 70%;
+    background: red;
 }
 
 #contact-form textarea, #contact-form input {
