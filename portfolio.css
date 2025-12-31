@@ -369,14 +369,14 @@ div .img {
 }
 
 #contact-form {
-    width: 70%;
+    width: 300px;
     background: red;
 }
 
 #contact-form textarea, #contact-form input {
     padding-left: 10px;
     margin-left: 0;
-    width: 90%;
+    width: 100%;
 }
 
 #contact-form button {
