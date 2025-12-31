@@ -375,11 +375,11 @@ div .img {
 #contact-form textarea, #contact-form input {
     padding-left: 10px;
     margin-left: 0;
+    max-width: 100%;
 }
 
 #contact-form button {
     margin-left: 0;
-    max-width: 100%;
     font-family: Ubuntu;
     font-size: 16px;
     font-weight: bolder;
