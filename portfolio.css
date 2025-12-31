@@ -374,10 +374,9 @@ div .img {
 }
 
 #contact-form textarea, #contact-form input {
-    position: relative;
     padding-left: 10px;
     margin-left: 0;
-    width: auto;
+    width: 90%;
 }
 
 #contact-form button {
