@@ -1,0 +1,421 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #050D00;
+    color: #fff;
+}
+
+header {
+    background-color: rgba(1, 13, 0, .8);
+    color: #fff;
+    pading: 10px;
+    position: fixed;
+    width: 100%;
+    height: 9vh;
+    top: 0;
+    z-index: 2;
+    align-content: center;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+nav ul {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin-right: 5%;
+    padding: 0;
+    justify-content: space-between;
+}
+
+nav li {
+    margin: 0;
+    backgrund: chartreuse;
+    text-align: center;
+}
+
+nav a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    cursor: pointer;
+    height: 35px; /*for shrink effect*/
+}
+
+nav a span {
+    font-weight: bold;
+    font-size: 1rem;
+    font-family: Ubuntu;
+    color: #000;
+}
+
+section {
+    margin-top: 5vh;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+p {
+    font-family: Courier New;
+    font-weight: bold;
+}
+
+#bavar span { 
+    align-content: center;
+    background: chartreuse;
+    min-height: 100%;
+    border-radius: 18px;
+    padding: 0 25px; /*for shrink effect*/
+    z-index: 2;
+    cursor: pointer;
+}
+
+#bavar span:hover, #bavar a:active {
+    background: #050D00;
+    border: 1px solid chartreuse;
+    color: #fff;
+    transition-duration: .5s;
+}
+
+.picContainer {
+    margin-top: 10vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background: #252633;
+    border-radius: 40px;
+    width: 100%;
+    height: 350px;
+    margin-bottom: 4rem;
+}
+
+#profilepic {
+    top: 12vh;
+    position: absolute;
+    aspect-ratio: 1/1;
+    border: 3px solid #050D00;
+    border-radius: 50%;
+    object-fit: cover;
+    height: 204px;
+    width: 204px;
+}
+
+.actualPC {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+section:nth-of-type(2) {
+    margin-top: 5vh;
+    padding: 60px 0;
+}
+
+.project {
+    margin: 0;
+    padding: 10px;
+    background-image: linear-gradient(to right, #050D00 70%, #FF006F) /*linear-gradient(to right, #4A006A, #E753FF)*/;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+input, textarea, button {
+    display: block;
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
+}
+
+footer {
+    background-color: #252633;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+.fancyBtn {
+    cursor: pointer;
+    height: 60px;
+    width: 10rem;
+    border: 2px solid #099;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.btnText {
+    position: absolute;
+    font-family: Ubuntu;
+    font-size: 1.5rem;
+    font-weight: bold;
+    z-index: 1;
+}
+
+.btnText a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.cover{
+    background: chartreuse;
+    height: 70px;
+    min-width: 15rem;
+    border-radius: 3rem 0 0 0;
+    transform: translateX(100%);
+    transition-duration: 1.5s;
+}
+
+.belowProPic {
+    display: flex;
+    flex-direction: row;
+    height: 50%;
+    justify-content: center;
+}
+
+#reachMe {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-left: 5%;
+    align-items: center;
+}
+
+#qrCode {
+    position: absolute;
+    right: 9.5%;
+}
+
+#reachMe img {
+    height: 15px;
+}
+
+.LinkedInCircle {
+    margin-right: 1.5%;
+    paddng: 4px;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    border: 3px solid #050D00;
+    align-content: center;
+    height: 25%;
+}
+
+.emailCircle {
+    margin-left: 1.5%;
+    paddng: 4px;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    border: 3px solid #050D00;
+    align-content: center;
+    height: 25%;
+}
+
+.jobOffer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.subHead {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.subHead h2 {
+    width: 60%;
+    padding: 0 2rem;
+    font-family: Fredoka;
+}
+
+.subHead div{
+    width: 20%;
+}
+
+hr {
+    border: 1px solid #fff;
+}
+
+.skillDisplay {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.skillDisplay div {
+    margin: 2%;
+    background: #050D00;
+    blur-radius: .5px;/*CHECK*/
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    border-radius: 10px;
+    justify-content: center;
+    align-content: center;
+}
+
+.skillDisplay div img {
+    height: 50%;
+    width: 50%;
+}
+
+.skillDisplay div span {
+    padding-top: 1rem;
+}
+
+.side {
+    width: 100%;
+    background: #FF006F;
+    min-height: 100%;
+    border-radius: 18px;
+    transform: translate(5%, -80%);
+    z-index: 1;
+}
+
+.projectDisplay {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.projectOne, .projectTwo, .projectThree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    min-height: 400px;
+    border-radius: 20px 0;
+}
+
+.describe {
+    height: 30%;
+    font-family: Balsamiq Sans;
+    display: flex;
+    align-items: center;
+}
+
+.describe div {
+    position: absolute;
+    right: 1em;
+    bottom: 2em;
+    padding: 10px;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    background-color: rgba(255, 255, 0, .5);
+}
+
+.describe div img {
+    height: 25px;
+    width: 25px;
+}
+
+div .img {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-width: 90%;
+    height: 55%;
+    margin: 5% 0;
+    border-radius: 8px;
+}
+
+#One {
+    background-image: url('calculator.png');
+}
+
+#Two {
+    background-image: url('restaurant.png');
+    background-size: 150% auto;
+}
+
+#Three {
+    background-image: url('portfolio.png');
+}
+
+.projectDisplay div:nth-of-type(even) {
+    margin: 0 5%;
+}
+
+.fancyBtn:hover > .cover {
+    transform: translateX(0%);
+}
+
+.meText h2 {
+    font-family: Berkshire Swash;
+}
+
+.meText h3 {
+    font-family: Fredoka;
+}
+
+#contact-form {
+    width: 70%;
+}
+
+#contact-form textarea, #contact-form input {
+    padding-left: 10px;
+    margin-left: 0;
+}
+
+#contact-form button {
+    margin-left: 0;
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.container {
+      margin: 15px;
+    }
+
+input[type="radio"] {
+      display: none; /* hide the radio button because it does not look beautiful */
+    }
+.container {
+      border: 1px solid #050D00;
+      border-radius: 5px;
+    }
+
+label {
+      font-family: Momo Trust Display;
+      display: block;
+      padding: 10px;
+      border-bottom: 1px solid #050D00;
+      color: #050D00;
+      background: chartreuse;
+}
+
+.accordion:last-child > label, .accordion:last-child > .accordion-content {
+      border: none;
+}
+
+.accordion-content {
+      border-bottom: 1px solid #050D00;
+      padding: 15px;
+      display: none;
+      font-family: Fredoka;
+    }
+    /* select the accordion content when the label is clicked on or the input is checked */
+input:checked ~ .accordion-content {
+      display: block;
+    }

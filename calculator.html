@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Calculator</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; margin: 0;
+    background: #f0f0f0;
+}
+
+.calculator {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    font-size: 24px;
+    text-align: right;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+button {
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #eee;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #ddd;
+}
+
+button.operator {
+    background: #ff9500;
+    color: white;
+}
+
+button.operator:hover {
+    background: #e68900;
+}
+
+button.function {
+    background: #4cd3e1;
+    color: white;
+}
+
+button.function:hover {
+    background: #3abfc9;
+}
+
+@media (max-width: 400px) {
+.buttons {
+    grid-template-columns: repeat(4, 1fr);
+}
+}
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" readonly>
+        <div class="buttons">
+            <button class="function" onclick="append('sin(')">sin</button>
+            <button class="function" onclick="append('cos(')">cos</button>
+            <button class="function" onclick="append('tan(')">tan</button>
+            <button class="function" onclick="append('log(')">log</button>
+            <button class="function" onclick="append('sqrt(')">√</button>
+            <button onclick="append('7')">7</button>
+            <button onclick="append('8')">8</button>
+            <button onclick="append('9')">9</button>
+            <button class="operator" onclick="append('/')">/</button>
+            <button class="function" onclick="append('^')">^</button>
+            <button onclick="append('4')">4</button>
+            <button onclick="append('5')">5</button>
+            <button onclick="append('6')">6</button>
+            <button class="operator" onclick="append('*')">*</button>
+            <button class="function" onclick="append('exp(')">exp</button>
+            <button onclick="append('1')">1</button>
+            <button onclick="append('2')">2</button>
+            <button onclick="append('3')">3</button>
+            <button class="operator" onclick="append('-')">-</button>
+            <button class="function" onclick="append('pi')">π</button>
+            <button onclick="append('0')">0</button>
+            <button onclick="append('.')">.</button>
+            <button onclick="append('('">(</button>
+            <button onclick="append(')')">)</button>
+            <button class="function" onclick="append('e')">e</button>
+            <button class="operator" onclick="append('+')">+</button>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="backspace()">←</button>
+            <button class="operator" onclick="calculate()">=</button>
+        </div>
+    </div>
+    <script>
+        const display = document.getElementById('display');
+        function append(value) { display.value += value; }
+        function clearDisplay() { display.value = ''; }
+        function backspace() { display.value = display.value.slice(0, -1); }
+        function calculate() {
+            try {
+                let expr = display.value
+                    .replace(/sin/g, 'Math.sin')
+                    .replace(/cos/g, 'Math.cos')
+                    .replace(/tan/g, 'Math.tan')
+                    .replace(/log/g, 'Math.log10')
+                    .replace(/sqrt/g, 'Math.sqrt')
+                    .replace(/exp/g, 'Math.exp')
+                    .replace(/pi/g, 'Math.PI')
+                    .replace(/e/g, 'Math.E')
+                    .replace(/\^/g, '**');
+                display.value = eval(expr);
+            } catch (e) { display.value = 'Error'; }
+        }
+    </script>
+</body>
+</html>

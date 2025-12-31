@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Landing Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Berkshire+Swash&family=Courgette&family=Fredoka:wght@300..700&family=Lilita+One&family=Momo+Trust+Display&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    overflow-x: hidden;
+    background: #1a1a1a; /* Dark for elegance */ 
+}
+
+.hero {
+    position: relative; 
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    padding-top: 20vh; /* Overlay starts ~20vh from top */
+}
+
+video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.8); /* Subtle dim */
+}
+
+.overlay {
+    background: rgba(127,255,0,0.5); /* Chartreuse semi-transparent */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 80%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+input[placeholder] {
+    font-family: Balsamiq Sans;
+}
+
+h1 {
+    font-size: 3em;
+    margin: 0;
+    font-family: Momo Trust Display;
+    color: #d4af37; /* Gold for heading */
+}
+
+#search {
+    width: 70%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 20px 0;
+    font-size: 1.2em;
+    border-radius: 5px;
+    border: none;
+    background: rgba(255,255,255,0.2);
+    color: white;
+
+}
+
+#search::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+.menu-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease-in-out;
+    background: rgba(26,26,26,0.9); /* Dark semi-transparent */
+    z-index: 500;
+}
+
+.menu-panel.active {
+    height: 35vh;
+    overflow-y: auto;
+}
+
+.close-panel {
+    background: rgba(26,26,26,0.95);
+    border-radius: 2px;
+    padding: 5px;
+    position: fixed;
+    bottom: calc(50vh + 10px);
+    left: 10px;
+    font-size: 2em;
+    cursor: pointer;
+    color: #d4af37;
+    transition: color 0.3s;
+    z-index: 501;
+    transform: translateY(100vh);
+    transition: transform 0.3s ease-in-out;
+}
+
+.menu-panel.active ~ .close-panel {
+    transform: translateY(0);
+}
+
+.close-panel:hover {
+    color: #7ff000;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.food-card {
+    position: relative;
+    background: rgba(127,255,0,0.2); /* Light chartreuse bg */
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+}
+
+.food-card:hover {
+    transform: scale(1.05);
+}
+
+.food-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.food-card h3 {
+    font-family: Momo Trust Display;
+    margin: 10px 0 5px;
+    font-size: 1.2em;
+    color: #d4af37; /* Gold text */
+}
+
+.food-card p {font-family: Fredoka; margin: 5px 0; font-size: 0.9em; }
+
+.like-button { border-radius: 50px; position: absolute; right: 10px; top: 160px; background: black; border: none; cursor: pointer; width: 3rem; height: 3rem; display: flex; align-items: center; justify-content: center; transform: translateY(-50%); }
+
+.order-button {font-family: Lilita One; background: #d4af37; color: #1a1a1a; padding: 10px; border: none; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 10px; transition: background 0.3s; }
+
+.order-button:hover { background: #b8952e; }
+
+.not-found { text-align: center; padding: 20px; color: #d4af37; }
+
+.not-found p {
+    font-family: Fredoka;
+}
+
+.not-found img { width: 200px; height: auto; margin-bottom: 10px; }
+
+.shrink-button { background: #d4af37; color: #1a1a1a; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px; transition: background 0.3s; }
+
+.shrink-button:hover { background: #b8952e; }
+
+/* Additional sections with fade-in */
+
+.section { opacity: 0; transition: opacity 1s ease-in; padding: 50px 20px; text-align: center; background: #2c2c2c; /* Dark section bg */ margin: 20px 0; border-radius: 10px; max-width: 80%; margin-left: auto; margin-right: auto; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+
+.section.visible {
+    opacity: 1;
+}
+
+.section h2 {
+    font-family: Berkshire Swash;
+    color: #d4af37;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.section p {
+    font-family: Fredoka;
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.chefs-section {
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+}
+
+.chefs {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.chef {
+    background: rgba(127,255,0,0.1);
+    padding: 10px;
+    border-radius: 10px;
+    width: 200px;
+    flex: 0 0 auto;
+}
+
+.chef img {
+    width: 100%;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    background-size: cover;
+}
+
+.specials {
+    list-style: none;
+    padding: 0;
+}
+
+.specials li {
+    font-family: Courgette;
+    background: rgba(127,255,0,0.2);
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* Sticky menu */
+
+.sticky-menu {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    background: #1a1a1a;
+    z-index: 1000;
+}
+
+.icons {
+    display: flex;
+    gap: 20px;
+    margin-right: 20px;
+    position: relative;
+}
+
+.material-icons {
+    color: #d4af37;
+    font-size: 2em;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.material-icons:hover {
+    color: #7ff000;
+}
+
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: #7ff000;
+    color: #1a1a1a;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+/* Footer */
+
+footer {
+    background: rgba(26,26,26,0.95);
+    padding: 20px 0;
+    text-align: center;
+    border-top: 2px solid #d4af37;
+    margin-top: 0; /* Minimize space */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    text-align: left;
+}
+
+.footer-section h3 {
+    color: #d4af37;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.footer-section p {
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+.socials {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.socials a {
+    width: 2rem;
+    height: 2rem;
+    color: #d4af37;
+    font-size: 1.5em;
+    transition: color 0.3s;
+}
+
+.socials a:hover {
+    color: #7ff000; /* Chartreuse hover */
+}
+
+.fab {
+    font-size: 1.5em;
+}
+
+/* Chat styles */
+
+.chat-button {
+    font-family: Fredoka;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #d4af37;
+    color: #1a1a1a;
+    padding: 15px 25px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background 0.3s,
+    transform 0.3s;
+    z-index: 1000;
+}
+
+.chat-button:hover {
+    background: #b8952e;
+    transform: scale(1.05);
+}
+
+.chat-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.chat-content {
+    background: #2c2c2c;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.chat-content h3 {
+    font-family: Berkshire Swash;
+    margin: 0 0 20px;
+    color: #d4af37;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+#chat-input {
+    width: 100%;
+    height: 100px;
+    padding: 15px;
+    font-size: 1em;
+    border: 1px solid #d4af37;
+    border-radius: 10px;
+    background: #1a1a1a;
+    color: white;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.send-button {
+    font-family: Lilita One;
+    background: #d4af37;
+    color: #1a1a1a;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+    width: 100%;
+    transition: background 0.3s;
+}
+
+.send-button:hover {
+    background: #b8952e;
+}
+
+p em {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #d4af37;
+}
+        
+@media (max-width: 768px) {
+h1 {
+    font-size: 2em;
+}
+
+#search {
+    width: 90%;
+}
+
+.food-card {
+    width: 100%;
+    max-width: 300px;
+}
+
+.menu-panel.active {
+    height: 60vh;
+}
+
+.section {
+    padding: 30px 10px;
+}
+
+.footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.socials {
+    justify-content: center;
+}
+
+.close-panel {
+    bottom: calc(60vh + 10px);
+}
+}
+
+    </style>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <nav class="sticky-menu">
+        <div class="icons">
+            <span style="position: relative;">
+                <i class="material-icons">shopping_cart</i>
+                <span class="badge" id="like-badge" style="display: none;"></span>
+            </span>
+            <i class="material-icons">account_circle</i>
+        </div>
+    </nav>
+    <section class="hero">
+        <video id="hero-video" autoplay muted playsinline>
+            <source src="food.mp4" type="video/mp4" />
+        </video>
+        <div class="overlay">
+            <h1>Welcome to Rubiserve</h1>
+            <input 
+                type="text" 
+                id="search" 
+                placeholder="Search Menu..." 
+            />
+        </div>
+    </section>
+    <div class="menu-panel" id="menu-panel">
+        <div class="grid" id="grid"></div>
+    </div>
+    <span class="close-panel" id="close-panel">&times;</span>
+    <section class="section about" id="about">
+        <h2>About Us</h2>
+        <p>Rubiserve is a premier 5-star restaurant offering exquisite cuisine in a luxurious setting. Established in 2010, we pride ourselves on using the freshest ingredients and innovative techniques.</p>
+    </section>
+    <section class="section chefs chefs-section" id="chefs">
+        <h2>Our Chefs</h2>
+        <div class="chefs">
+            <div class="chef">
+                <img src="john.jpg" alt="Chef John Doe" />
+                <h3>Chef John Doe</h3>
+                <p>Master of Italian cuisine with 20 years experience.</p>
+            </div>
+            <div class="chef">
+                <img src="jane.jpg" alt="Chef Jane Smith" />
+                <h3>Chef Jane Smith</h3>
+                <p>Expert in Asian fusion dishes.</p>
+            </div>
+            <div class="chef">
+                <img src="alice.jpg" alt="Chef Alice Johnson" />
+                <h3>Chef Alice Johnson</h3>
+                <p>Specialist in French pastries with 15 years experience.</p>
+            </div>
+        </div>
+    </section>
+    <section class="section specials" id="specials">
+        <h2>Today's Specials</h2>
+        <ul class="specials">
+            <li>Truffle Risotto</li>
+            <li>Lobster Thermidor</li>
+            <li>Chocolate Souffle</li>
+        </ul>
+    </section>
+    <footer class="section" id="footer">
+        <div class="footer-content">
+            <div class="footer-section address">
+                <h3>Contact Us</h3>
+                <p>123 Gourmet Street</p>
+                <p>Food City, FC 12345</p>
+                <p>Phone: (123) 456-7890</p>
+                <p>Email: info@rubiserve.com</p>
+            </div>
+            <div class="footer-section hours">
+                <h3>Opening Hours</h3>
+                <p>Monday - Friday: 11:00 AM - 10:00 PM</p>
+                <p>Saturday - Sunday: 10:00 AM - 11:00 PM</p>
+                <p>Holidays: Closed (except special events)</p>
+            </div>
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <p><a href="#" style="color: #7ff000; text-decoration: none;">Menu</a></p>
+                <p><a href="#" style="color: #7ff000; text-decoration: none;">Reservations</a></p>
+                <p><a href="#" style="color: #7ff000; text-decoration: none;">Events</a></p>
+                <p><a href="#" style="color: #7ff000; text-decoration: none;">Gallery</a></p>
+            </div>
+            <div class="footer-section social">
+                <h3>Follow Us</h3>
+                <div class="socials">
+                    <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
+                    <a href="https://facebook.com"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="chat-button" id="chat-button">Chat Us</div>
+    <div class="chat-modal" id="chat-modal">
+        <div class="chat-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <h3>Concierge Outreach</h3>
+            <textarea id="chat-input" placeholder="Enter your inquiry..."></textarea>
+            <button class="send-button" id="send-button">Send</button>
+        </div>
+    </div>
+    <script type="text/babel">
+        const { useState } = React;
+
+        const foods = [
+            { name: 'Pasta', description: 'Delicious Italian pasta with tomato sauce.', image: 'pasta.jpg', price: 15.9 },
+            { name: 'Burger', description: 'Juicy beef burger with cheese and fries.', image: 'burger.jpg', price: 12.6 },
+            { name: 'Salad', description: 'Fresh garden salad with vinaigrette.', image: 'salad.jpg', price: 10.4 },
+            { name: 'Pizza', description: 'Cheesy pizza with pepperoni toppings.', image: 'pizza.jpg', price: 18.3 },
+            { name: 'Sushi', description: 'Assorted sushi rolls with wasabi.', image: 'sushi.jpg', price: 20 },
+        ];
+
+        function FoodCard({ food, onLikeChange, isLiked }) {
+            const likeSrc = isLiked ? 'loveOther.png' : 'loveOpen.png';
+            const size = isLiked && window.smallFoods.has(food.name) ? '2rem' : '3rem';
+
+            const toggleLike = () => {
+                const newLiked = !isLiked;
+                onLikeChange(food.name, newLiked);
+            };
+
+            return (
+                <div className="food-card">
+                    <img src={food.image} alt={food.name} />
+                    <button className="like-button" onClick={toggleLike}>
+                        <img src={likeSrc} style={{ width: size, height: size }} />
+                    </button>
+                    <h3>{food.name}</h3>
+                    <p>{food.description}</p>
+                    <p><em>${food.price}</em></p>
+                    <button className="order-button" title="Order">Order Now </button>
+                </div>
+            );
+        }
+
+        function FoodGrid({ query }) {
+            const filtered = foods.filter(food => food.name.toLowerCase().includes(query.toLowerCase()));
+
+            if (filtered.length === 0) {
+                return (
+                    <div className="not-found">
+                        <img src="noFood.png" alt="Not Found" />
+                        <p>Sorry, item not in stock.</p>
+                        <button className="shrink-button" onClick={shrinkPanel}>Shrink Box</button>
+                    </div>
+                );
+            }
+
+            return filtered.map(food => (
+                <FoodCard key={food.name} food={food} onLikeChange={handleLikeChange} isLiked={window.likedFoods.has(food.name)} />
+            ));
+        }
+
+        let root = null;
+
+        function renderReactGrid(query) {
+            const grid = document.getElementById('grid');
+            if (!root) {
+                root = ReactDOM.createRoot(grid);
+            }
+            root.render(<FoodGrid query={query} />);
+        }
+    </script>
+    <script>
+        window.likedFoods = new Set();
+        window.smallFoods = new Set();
+
+        function updateBadge() {
+            const badge = document.getElementById('like-badge');
+            if (window.likedFoods.size > 0) {
+                badge.textContent = window.likedFoods.size;
+                badge.style.display = 'inline-block';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        function handleLikeChange(name, isLiked) {
+            if (isLiked) {
+                window.likedFoods.add(name);
+                setTimeout(() => {
+                    window.smallFoods.add(name);
+                    renderReactGrid(document.getElementById('search').value);
+                }, 2000);
+            } else {
+                window.likedFoods.delete(name);
+                window.smallFoods.delete(name);
+            }
+            updateBadge();
+            renderReactGrid(document.getElementById('search').value);
+        }
+
+        function shrinkPanel() {
+            document.getElementById('search').value = '';
+            document.getElementById('menu-panel').classList.remove('active');
+            document.getElementById('chat-button').textContent = 'Chat Us';
+            if (root) {
+                root.unmount();
+                root = null;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const search = document.getElementById('search');
+            search.addEventListener('input', (e) => {
+                const query = e.target.value;
+                const panel = document.getElementById('menu-panel');
+                if (query.length > 0) {
+                    panel.classList.add('active');
+                    renderReactGrid(query);
+                } else {
+                    panel.classList.remove('active');
+                    if (root) {
+                        root.unmount();
+                        root = null;
+                    }
+                }
+                const chatButton = document.getElementById('chat-button');
+                chatButton.textContent = query.length > 0 ? '💬' : 'Chat Us';
+            });
+
+            document.getElementById('close-panel').addEventListener('click', shrinkPanel);
+
+            // Scroll for visible
+            const sections = document.querySelectorAll('.section');
+            function checkScroll() {
+                if (window.scrollY > (window.innerHeight - 250)) {
+                    sections.forEach(sec => sec.classList.add('visible'));
+                }
+            }
+            window.addEventListener('scroll', checkScroll);
+            checkScroll(); // initial check if already scrolled
+
+            // Chat
+            const chatButton = document.getElementById('chat-button');
+            const chatModal = document.getElementById('chat-modal');
+            const closeModal = document.getElementById('close-modal');
+            const sendButton = document.getElementById('send-button');
+            const chatInput = document.getElementById('chat-input');
+
+            chatButton.addEventListener('click', () => {
+                chatModal.style.display = 'flex';
+            });
+
+            closeModal.addEventListener('click', () => {
+                chatModal.style.display = 'none';
+            });
+
+            sendButton.addEventListener('click', () => {
+                const message = chatInput.value.trim();
+                if (message) {
+                    window.open(`https://wa.me/+23490828728?text=${encodeURIComponent(message)}`, '_blank');
+                    chatInput.value = '';
+                    chatModal.style.display = 'none';
+                }
+            });
+
+            // Video play
+            const video = document.getElementById('hero-video');
+            video.play();
+        });
+    </script>
+</body>
+</html>
