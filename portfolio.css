@@ -128,11 +128,6 @@ section:nth-of-type(2) {
     background-image: linear-gradient(to right, #050D00 70%, #FF006F);
 }
 
-form {
-    max-width: 400px;
-    margin: 0 auto;
-}
-
 input, textarea, button {
     display: block;
     width: 100%;
@@ -209,6 +204,7 @@ footer {
 #reachMe img {
     height: 18px;
     border-radius: 3px;
+    padding-top: 2px;
 }
 
 .LinkedInCircle, .emailCircle, .whatsappCircle {
