@@ -8,19 +8,50 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+
 document.addEventListener('DOMContentLoaded', () => {
+    
+const menuIcons = () => {
+  const menuItems = document.querySelectorAll('.menuItem');
+  const menuData = {
+    about: {
+      id: 'About',
+      data: '<img class="navIcons" src="profileW.png" />',
+    },
+    projects: {
+      id: 'Projects',
+      data: '<img class="navIcons" src="projectsW.png" />',
+    },
+    skills: {
+      id: 'Skills',
+      data: '<img class="navIcons" src="skillsW.png"/>',
+    }
+  };
+
+  if (window.innerWidth >= 300 && window.innerWidth < 500) {
+    menuItems.forEach(item => {
+      const text = item.textContent.trim();
+      Object.values(menuData).forEach(config => {
+        if (text.includes(config.id)) {
+          item.innerHTML = config.data;
+        }
+      });
+    });
+  }
+};
+menuIcons();
+    
   const container = document.querySelector('.projectDisplay');
   if (!container) return;
 
 
-  const originalWidth = container.scrollWidth / 2; //container.getBoundingClientRect();
+  const originalWidth = container.scrollWidth / 2;
   
 let scrollLeft = 0;
-  const speed = 1; // Pixels per frame; adjust for desired speed (e.g., 1-3)
+  const speed = 1;
   let isPaused = false;
   let pauseTimeout;
 
-  // Animation loop using requestAnimationFrame for efficiency
   function animate() {
     if (!isPaused) {
       scrollLeft += 1;
@@ -32,10 +63,9 @@ let scrollLeft = 0;
     requestAnimationFrame(animate);
   }
 
-  animate(); // Start animation
+  animate();
 
-  // Pause on user interaction (wheel or touch) for 3 seconds to allow manual scroll
-  const pauseDuration = 3000; // ms
+  const pauseDuration = 3000;
   function pauseAnimation() {
     isPaused = true;
     clearTimeout(pauseTimeout)
@@ -47,16 +77,4 @@ let scrollLeft = 0;
   container.addEventListener('wheel', pauseAnimation);
   container.addEventListener('touchstart', pauseAnimation);
   container.addEventListener('touchmove', pauseAnimation);
-});
-
-// Basic form handler (logs to console; replace with real backend if needed)
-const form = document.getElementById('contact-form');
-form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = form.querySelector('input[type="text"]').value;
-    const email = form.querySelector('input[type="email"]').value;
-    const message = form.querySelector('textarea').value;
-    console.log(`Name: ${name}, Email: ${email}, Message: ${message}`);
-    alert('Message sent! (Logged to console)');
-    form.reset();
 });
