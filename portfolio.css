@@ -7,15 +7,20 @@ body {
 }
 
 header {
-    background-color: rgba(1, 13, 0, .8);
+    background-color: rgba(1, 13, 0, 0.8);
     color: #fff;
-    pading: 10px;
     position: fixed;
     width: 100%;
-    height: 9vh;
+    height: 80px;
     top: 0;
     z-index: 2;
     align-content: center;
+}
+
+a {
+    -webkit-tap-highlight-color: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 nav {
@@ -24,6 +29,7 @@ nav {
 }
 
 nav ul {
+    position: relative;
     width: 60%;
     display: flex;
     flex-direction: row;
@@ -43,11 +49,10 @@ nav a {
     display: flex;
     flex-direction: column;
     text-decoration: none;
-    cursor: pointer;
     height: 35px; /*for shrink effect*/
 }
 
-nav a span {
+nav a .menuItem {
     font-weight: bold;
     font-size: 1rem;
     font-family: Ubuntu;
@@ -65,17 +70,17 @@ p {
     font-weight: bold;
 }
 
-#bavar span { 
+#bavar .menuItem { 
     align-content: center;
     background: chartreuse;
     min-height: 100%;
     border-radius: 18px;
-    padding: 0 25px; /*for shrink effect*/
+    padding: 0 25px;
     z-index: 2;
     cursor: pointer;
 }
 
-#bavar span:hover, #bavar a:active {
+#bavar .menuItem:hover {
     background: #050D00;
     border: 1px solid chartreuse;
     color: #fff;
@@ -83,7 +88,8 @@ p {
 }
 
 .picContainer {
-    margin-top: 10vh;
+    position: relative;
+    margin-top: 100px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -95,7 +101,7 @@ p {
 }
 
 #profilepic {
-    top: 12vh;
+    top: -30%;
     position: absolute;
     aspect-ratio: 1/1;
     border: 3px solid #050D00;
@@ -119,7 +125,7 @@ section:nth-of-type(2) {
 .project {
     margin: 0;
     padding: 10px;
-    background-image: linear-gradient(to right, #050D00 70%, #FF006F) /*linear-gradient(to right, #4A006A, #E753FF)*/;
+    background-image: linear-gradient(to right, #050D00 70%, #FF006F);
 }
 
 form {
@@ -144,7 +150,7 @@ footer {
 .fancyBtn {
     cursor: pointer;
     height: 60px;
-    width: 10rem;
+    width: 11rem;
     border: 2px solid #099;
     display: flex;
     flex-direction: row;
@@ -167,7 +173,7 @@ footer {
     cursor: pointer;
 }
 
-.cover{
+.cover {
     background: chartreuse;
     height: 70px;
     min-width: 15rem;
@@ -196,11 +202,16 @@ footer {
     right: 9.5%;
 }
 
-#reachMe img {
-    height: 15px;
+#qrCode img {
+    border-radius: 3px;
 }
 
-.LinkedInCircle {
+#reachMe img {
+    height: 18px;
+    border-radius: 3px;
+}
+
+.LinkedInCircle, .emailCircle, .whatsappCircle {
     margin-right: 1.5%;
     paddng: 4px;
     border-radius: 50%;
@@ -210,14 +221,13 @@ footer {
     height: 25%;
 }
 
-.emailCircle {
-    margin-left: 1.5%;
-    paddng: 4px;
-    border-radius: 50%;
-    aspect-ratio: 1/1;
-    border: 3px solid #050D00;
-    align-content: center;
-    height: 25%;
+.whatsappCircle {
+    visibility: hidden;
+}
+
+.LinkedInCircle:hover, .emailCircle:hover, .whatsappCircle:hover {
+    background: chartreuse;
+    backdrop-filter: blur(10px);
 }
 
 .jobOffer {
@@ -258,7 +268,9 @@ hr {
 .skillDisplay div {
     margin: 2%;
     background: #050D00;
-    blur-radius: .5px;/*CHECK*/
+    blur-radius: .5px;
+    background-image: linear-gradient(to right, #FF006F, #050D00);
+    backdrop-filter: blur(10px);
     height: 150px;
     display: flex;
     flex-direction: column;
@@ -275,6 +287,7 @@ hr {
 
 .skillDisplay div span {
     padding-top: 1rem;
+    font-family: Fredoka;
 }
 
 .side {
@@ -316,17 +329,22 @@ hr {
 
 .describe div {
     position: absolute;
+    visibility: hidden;
     right: 1em;
     bottom: 2em;
     padding: 10px;
     border-radius: 50%;
     aspect-ratio: 1/1;
-    background-color: rgba(255, 255, 0, .5);
+    background: #FF006F;
 }
 
 .describe div img {
     height: 25px;
     width: 25px;
+}
+
+.picker .describe:hover > div {
+    visibility: visible;
 }
 
 div .img {
@@ -360,6 +378,10 @@ div .img {
     transform: translateX(0%);
 }
 
+.fancyBtn:hover > .btnText {
+    color: #050D00;
+}
+
 .meText h2 {
     font-family: Berkshire Swash;
 }
@@ -369,21 +391,28 @@ div .img {
 }
 
 #contact-form {
-    width: 300px;
-    overflow: hidden;
+    width: 70%;
 }
 
 #contact-form textarea, #contact-form input {
     padding-left: 10px;
     margin-left: 0;
-    width: 98%;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    color: #050D00;
 }
 
 #contact-form button {
-    width: 300px;
+    cursor: pointer;
     margin-left: 0;
     font-family: Ubuntu;
     font-size: 16px;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
     font-weight: bolder;
 }
 
@@ -392,7 +421,7 @@ div .img {
     }
 
 input[type="radio"] {
-      display: none; /* hide the radio button because it does not look beautiful */
+      display: none;
     }
 .container {
       border: 1px solid #050D00;
@@ -418,7 +447,76 @@ label {
       display: none;
       font-family: Fredoka;
     }
-    /* select the accordion content when the label is clicked on or the input is checked */
+
 input:checked ~ .accordion-content {
       display: block;
     }
+
+
+@media (max-width: 500px) {
+header {
+    height: 50px;
+}
+
+nav ul {
+    
+    height: 40px;
+    float: right;
+    flex-direction: row;
+    margin: 0;
+    justify-content: space-around;
+}
+
+#bavar a {
+    display: flex;
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    width: 36px;
+    height: 35px;
+}
+
+#bavar a .menuItem {
+    align-content: center;
+    background: #050D00;
+    height: 100%;
+    padding: 0;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.side {
+    visibility: hidden;
+}
+
+#bavar .menuItem:hover {
+    transition-duration: .2s;
+}
+
+.navIcons {
+    width: 20px;
+}
+
+.picContainer {
+    height: 330px;
+}
+
+#profilepic {
+    height: 185px;
+    width: 185px;
+}
+
+#qrCode {
+    visibility: hidden;
+}
+
+#reachMe {
+    justify-content: center;
+}
+
+.whatsappCircle {
+    visibility: visible;
+}
+}
+
