@@ -1,0 +1,23 @@
+{
+  "name": "web-portfolio",
+  "version": "1.0.0",
+  "description": "Ozoeze James - Portfolio | Nigerian SEO Expert & Web Developer",
+  "main": "index.html",
+  "scripts": {
+    "dev": "echo 'Static site - no dev server'",
+    "build": "echo 'Static site - no build required'"
+  },
+  "keywords": [
+    "portfolio",
+    "web-developer",
+    "seo-expert",
+    "html",
+    "css",
+    "javascript"
+  ],
+  "author": "Ozoeze James",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/analytics": "^1.4.0"
+  }
+}
