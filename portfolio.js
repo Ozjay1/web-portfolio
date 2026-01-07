@@ -16,7 +16,7 @@ const menuIcons = () => {
   const menuData = {
     about: {
       id: 'About',
-      data: '<img class="navIcons" src="profileW.png" />',
+      data: '<img class="navIcons" src="pictures/profileW.png" />',
     },
     projects: {
       id: 'Projects',
