@@ -9,8 +9,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    
+document.addEventListener('DOMContentLoaded', () => {    
 const menuIcons = () => {
   const menuItems = document.querySelectorAll('.menuItem');
   const menuData = {
@@ -38,8 +37,9 @@ const menuIcons = () => {
       });
     });
   }
+    menuIcons();
 };
-menuIcons();
+
     
   const container = document.querySelector('.projectDisplay');
   if (!container) return;
