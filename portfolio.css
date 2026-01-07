@@ -354,16 +354,16 @@ div .img {
 }
 
 #One {
-    background-image: url('calculator.png');
+    background-image: url('pictures/calculator.png');
 }
 
 #Two {
-    background-image: url('restaurant.png');
+    background-image: url('pictures/restaurant.png');
     background-size: 150% auto;
 }
 
 #Three {
-    background-image: url('portfolio.png');
+    background-image: url('pictures/portfolio.png');
 }
 
 .projectDisplay div:nth-of-type(even) {
