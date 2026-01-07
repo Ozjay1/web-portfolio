@@ -15,15 +15,15 @@ const menuIcons = () => {
   const menuData = {
     about: {
       id: 'About',
-      data: '<img class="navIcons" src="profileW.png" alt="prof"/>',
+      data: '<img class="navIcons" src="profileW.png"/>',
     },
     projects: {
       id: 'Projects',
-      data: '<img class="navIcons" src="projectsW.png" alt="pro"/>',
+      data: '<img class="navIcons" src="projectsW.png"/>',
     },
     skills: {
       id: 'Skills',
-      data: '<img class="navIcons" src="skillsW.png" alt="ski"/>',
+      data: '<img class="navIcons" src="skillsW.png"/>',
     }
   };
 
