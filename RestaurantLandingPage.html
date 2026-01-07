@@ -585,15 +585,15 @@ h1 {
         const { useState } = React;
 
         const foods = [
-            { name: 'Pasta', description: 'Delicious Italian pasta with tomato sauce.', image: 'pasta.jpg', price: 15.9 },
-            { name: 'Burger', description: 'Juicy beef burger with cheese and fries.', image: 'burger.jpg', price: 12.6 },
-            { name: 'Salad', description: 'Fresh garden salad with vinaigrette.', image: 'salad.jpg', price: 10.4 },
-            { name: 'Pizza', description: 'Cheesy pizza with pepperoni toppings.', image: 'pizza.jpg', price: 18.3 },
-            { name: 'Sushi', description: 'Assorted sushi rolls with wasabi.', image: 'sushi.jpg', price: 20 },
+            { name: 'Pasta', description: 'Delicious Italian pasta with tomato sauce.', image: 'pictures/pasta.jpg', price: 15.9 },
+            { name: 'Burger', description: 'Juicy beef burger with cheese and fries.', image: 'pictures/burger.jpg', price: 12.6 },
+            { name: 'Salad', description: 'Fresh garden salad with vinaigrette.', image: 'pictures/salad.jpg', price: 10.4 },
+            { name: 'Pizza', description: 'Cheesy pizza with pepperoni toppings.', image: 'pictures/pizza.jpg', price: 18.3 },
+            { name: 'Sushi', description: 'Assorted sushi rolls with wasabi.', image: 'pictures/sushi.jpg', price: 20 },
         ];
 
         function FoodCard({ food, onLikeChange, isLiked }) {
-            const likeSrc = isLiked ? 'loveOther.png' : 'loveOpen.png';
+            const likeSrc = isLiked ? 'pictures/loveOther.png' : 'pictures/loveOpen.png';
             const size = isLiked && window.smallFoods.has(food.name) ? '2rem' : '3rem';
 
             const toggleLike = () => {
@@ -621,7 +621,7 @@ h1 {
             if (filtered.length === 0) {
                 return (
                     <div className="not-found">
-                        <img src="noFood.png" alt="Not Found" />
+                        <img src="pictures/noFood.png" alt="Not Found" />
                         <p>Sorry, item not in stock.</p>
                         <button className="shrink-button" onClick={shrinkPanel}>Shrink Box</button>
                     </div>
