@@ -32,14 +32,13 @@ const menuIcons = () => {
       const text = item.textContent.trim();
       Object.values(menuData).forEach(config => {
         if (text.includes(config.id)) {
-          item.innerHTML = config.data;
+          item.innerHTML = 'jsdhb';
         }
       });
     });
   }
-    menuIcons();
 };
-
+menuIcons();
     
   const container = document.querySelector('.projectDisplay');
   if (!container) return;
