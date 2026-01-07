@@ -16,11 +16,11 @@ const menuIcons = () => {
   const menuData = {
     about: {
       id: 'About',
-      data: '<img class="navIcons" src="pictures/profileW.png" />',
+      data: '<img class="navIcons" src="profileW.png"/>',
     },
     projects: {
       id: 'Projects',
-      data: '<img class="navIcons" src="projectsW.png" />',
+      data: '<img class="navIcons" src="projectsW.png"/>',
     },
     skills: {
       id: 'Skills',
